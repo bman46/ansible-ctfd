@@ -66,6 +66,7 @@
     name: "{{ item }}"
   loop:
      - gunicorn
+     - gevent
      - pymysql
 
 - name: copy systemd unit file
