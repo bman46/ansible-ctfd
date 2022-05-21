@@ -14,3 +14,6 @@
     group: root
     mode: 0600
   notify: restart redis server
+
+- name: Flush handlers to restart redis
+  meta: flush_handlers
