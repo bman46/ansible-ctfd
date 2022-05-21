@@ -65,14 +65,8 @@
     virtualenv_python: python3
     name: "{{ item }}"
   loop:
-     - uwsgi
-     - psycopg2
-
-- name: copy uwsgi config
-  become_user: "{{ service_user }}"
-  template:
-    src: ctfd.ini.j2
-    dest: "{{ uwsgi_config_path }}"
+     - gunicorn
+     - pymysql
 
 - name: copy systemd unit file
   template:

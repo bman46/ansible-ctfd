@@ -2,14 +2,11 @@
   become: true
   user: root
   roles:
-    - name: postresql
-      tags: postresql
+    - name: mysql
+      tags: mysql
 
     - name: redis
       tags: redis
 
     - name: ctfd
       tags: ctfd
-
-    - name: nginx
-      tags: nginx

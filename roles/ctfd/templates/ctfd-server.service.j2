@@ -1,5 +1,5 @@
 [Unit]
-Description=uWSGI instance to serve ctfd server
+Description=Gunicorn instance to serve ctfd server
 After=network.target
 
 [Service]
@@ -8,7 +8,7 @@ Group=www-data
 WorkingDirectory={{ server_app_path }}
 Environment="PATH={{ venv_path }}/{{ venv_name }}/bin"
 EnvironmentFile={{ enviroment_file_path }}
-ExecStart={{ venv_path }}/{{ venv_name }}/bin/uwsgi --ini {{ uwsgi_config_path }}
+ExecStart={{ venv_path }}/{{ venv_name }}/bin/gunicorn --bind 0.0.0.0:8000 -w 8 'CTFd:create_app()'
 
 [Install]
 WantedBy=multi-user.target

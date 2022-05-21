@@ -1,6 +1,3 @@
 ---
 ctfd_repo: https://github.com/CTFd/CTFd
 ctfd_version: 3.5.0
-
-uwsgi_config_path: "{{ server_app_path }}/ctfd.ini"
-

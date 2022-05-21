@@ -1,0 +1,32 @@
+---
+- name: install required packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  loop:
+    - mysql-server
+    - python3-pip
+
+- name: install pymysql
+  pip:
+    name: pymysql
+    state: present
+
+- name: create database "{{ database }}"
+  become: true
+  community.mysql.mysql_db:
+    # you can get socket path from /etc/mysql/mysql.conf.d/mysqld.cnf
+    login_unix_socket: /var/run/mysqld/mysqld.sock  # default path
+    name: "{{ database }}"
+    state: present
+    
+- name: create database user "{{ database_user }}"
+  become: true
+  community.mysql.mysql_user:
+    # you can get socket path from /etc/mysql/mysql.conf.d/mysqld.cnf
+    login_unix_socket: /var/run/mysqld/mysqld.sock  # default path
+    name: "{{ database_user }}"
+    password: "{{ sql_database_pass }}"
+    priv: '*.*:ALL'
+    state: present

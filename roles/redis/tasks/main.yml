@@ -4,6 +4,7 @@
     name: redis-server
     state: present
     update_cache: yes
+  notify: restart redis server
 
 - name: copy redis config
   template:
@@ -12,9 +13,4 @@
     owner: redis
     group: root
     mode: 0600
-
-- name: restart redis server
-  service:
-    name: redis-server
-    state: restarted
-    enabled: yes
+  notify: restart redis server
