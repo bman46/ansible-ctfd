@@ -5,7 +5,7 @@
     state: present
     update_cache: yes
   loop:
-    - python-pip
+    - python3-pip
     - virtualenv
     - build-essential
     - libssl-dev
@@ -44,17 +44,17 @@
 - name: create venv with upgraded pip
   become_user: "{{ service_user }}"
   pip:
-    name: pip==18.1
+    name: pip
     chdir: "{{ venv_path }}"
     virtualenv: "{{ venv_name }}"
-    virtualenv_python: python2
+    virtualenv_python: python3
 
 - name: install requirements
   become_user: "{{ service_user }}"
   pip:
     chdir: "{{ venv_path }}"
     virtualenv: "{{ venv_name }}"
-    virtualenv_python: python2
+    virtualenv_python: python3
     requirements: "{{ server_app_path }}/requirements.txt"
 
 - name: install additional packages
@@ -62,11 +62,11 @@
   pip:
     chdir: "{{ venv_path }}"
     virtualenv: "{{ venv_name }}"
-    virtualenv_python: python2
+    virtualenv_python: python3
     name: "{{ item }}"
   loop:
-     - uwsgi==2.0.17.1
-     - psycopg2==2.7.5
+     - uwsgi
+     - psycopg2
 
 - name: copy uwsgi config
   become_user: "{{ service_user }}"
@@ -85,5 +85,3 @@
     name: ctfd-server
     state: started
     enabled: yes
-
-

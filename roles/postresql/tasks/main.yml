@@ -5,13 +5,13 @@
     update_cache: yes
     state: present
   loop:
-    - postgresql-9.5
+    - postgresql
     - libpq-dev
     - python3-pip
 
 - name: install psycopg2
   pip:
-    name: psycopg2==2.7.5
+    name: psycopg2
     state: present
 
 - name: create database "{{ database }}"
